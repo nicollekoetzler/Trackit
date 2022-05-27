@@ -1,6 +1,5 @@
 import "../assets/css/reset.css";
 import "../assets/css/style.css";
-import styled from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import TelaLogin from "./TelaLogin";
@@ -8,11 +7,15 @@ import TelaCadastro from "./TelaCadastro";
 import TelaHabitos from "./TelaHabitos";
 import TelaHoje from "./TelaHoje";
 import TelaHistorico from "./TelaHistorico";
+import Header from "./Layouts/Header";
+import Bottom from "./Layouts/Bottom";
 
 
 export default function App(){
     return(
         <BrowserRouter>
+            {/* <Header /> */} 
+            {/* <Bottom /> */} 
             <Routes>
                 <Route path="/" element={<TelaLogin />} />
                 <Route path="/cadastro" element={<TelaCadastro />} />
