@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import logo from '../assets/css/imgs/logo.png'
 import axios from 'axios'
+import {Link} from 'react-router-dom';
 import { useState } from 'react';
 
 
@@ -53,7 +54,9 @@ export default function TelaLogin() {
                     <button type="submit">Entrar</button>
                 </Button>
             </form>
+            <Link to={`/cadastro`} >
             <p>Não tem uma conta? Cadastre-se!</p>
+            </Link>
         </Container>
     )
 }
