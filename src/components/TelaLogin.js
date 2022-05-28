@@ -1,16 +1,53 @@
 import styled from 'styled-components';
 import logo from '../assets/css/imgs/logo.png'
+import axios from 'axios'
+import { useState } from 'react';
+
+
 
 export default function TelaLogin() {
+    const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
+
+    const [inputEmail, setInputEmail] = useState("");
+    const [inputPassword, setInputPassword] = useState("");
+
+    // infosUsuario - armazena objeto com informações usuário
+    const [infosUsuario, setInfosUsuario] = useState({});
+
+    function setData(event) {
+        event.preventDefault()
+
+        const body = {
+            email: inputEmail,
+            password: inputPassword
+        }
+    
+        const promise = axios.post(URL, body);
+    
+        promise.then((response) => {
+            setInfosUsuario(response.data);
+        });
+    }
+
+        /*
+    // event - contém informação que o usuário digitou
+    function alteraEmail(event) {
+        // target - mira na informação necessária
+        // value - informação do input
+        setInputEmail(event.target.value);
+    }    */
+
+    // e = abreviação de event
+
     return(
         <Container>
             <img src={logo} />
-            <form>
+            <form onSubmit={setData}>
                 <Email>
-                    <input type="email" placeholder="email"/>
+                    <input onChange={e => setInputEmail(e.target.value)} value={inputEmail} type="email" placeholder="email"/>
                 </Email>
                 <Senha>
-                    <input type="password" placeholder="senha"/>
+                    <input onChange={e => setInputPassword(e.target.value)} value={inputPassword} type="password" placeholder="senha"/>
                 </Senha>
                 <Button>
                     <button type="submit">Entrar</button>
@@ -80,7 +117,6 @@ input {
     font-style: normal;
     font-weight: 400;
     font-size: 19.976px;
-    color: white;
 }
 `
 
@@ -96,7 +132,6 @@ input {
     font-style: normal;
     font-weight: 400;
     font-size: 19.976px;
-    color: #DBDBDB;
     margin-top: 6px;
 }
 `
