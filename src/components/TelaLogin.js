@@ -26,19 +26,10 @@ export default function TelaLogin() {
         const promise = axios.post(URL, body);
     
         promise.then((response) => {
-            setInfosUsuario(response.data);
+            console.log(response);
         });
     }
 
-        /*
-    // event - contém informação que o usuário digitou
-    function alteraEmail(event) {
-        // target - mira na informação necessária
-        // value - informação do input
-        setInputEmail(event.target.value);
-    }    */
-
-    // e = abreviação de event
 
     return(
         <Container>
@@ -55,7 +46,7 @@ export default function TelaLogin() {
                 </Button>
             </form>
             <Link to={`/cadastro`} >
-            <p>Não tem uma conta? Cadastre-se!</p>
+                <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
         </Container>
     )

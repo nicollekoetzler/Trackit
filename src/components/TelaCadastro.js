@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import logo from '../assets/css/imgs/logo.png'
 import axios from 'axios'
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -15,9 +16,10 @@ export default function TelaCadastro() {
 
     const [infosCadastro, setInfosCadastro] = useState({});
 
-    function setData(event) {
-        event.preventDefault()
+    const navigate = useNavigate();
 
+    function setData() {
+    
         const body = {
             email: inputEmail,
             name: inputName,
@@ -28,14 +30,24 @@ export default function TelaCadastro() {
         const promise = axios.post(URL, body);
     
         promise.then((response) => {
-            setInfosCadastro(response);
+            navigate("/")
         });
+    }
+
+    function conferirUrl(event) {
+        event.preventDefault()
+
+        const image = new Image();
+
+        image.src = inputImage
+        image.onload = () => setData();
+        image.onerror = () => alert("A URL não é válida");
     }
 
     return(
         <Container>
             <img src={logo} />
-            <form onSubmit={setData}>
+            <form onSubmit={conferirUrl}>
                 <FormStyle>
                     <input onChange={e => setInputEmail(e.target.value)} value={inputEmail} type="email" placeholder="email"/>
                 </FormStyle>
@@ -43,16 +55,18 @@ export default function TelaCadastro() {
                     <input onChange={e => setInputPassword(e.target.value)} value={inputPassword} type="password" placeholder="senha"/>
                 </FormStyle>
                 <FormStyle>
-                    <input onChange={e => setInputName(e.target.value)} value={inputName} type="password" placeholder="nome"/>
+                    <input onChange={e => setInputName(e.target.value)} value={inputName} type="text" placeholder="nome"/>
                 </FormStyle>
                 <FormStyle>
-                    <input onChange={e => setInputImage(e.target.value)} value={inputImage} type="password" placeholder="foto"/>
+                    <input onChange={e => setInputImage(e.target.value)} value={inputImage} type="text" placeholder="foto"/>
                 </FormStyle>
                 <Button>
                     <button type="submit">Cadastrar</button>
                 </Button>
             </form>
+            <Link to={`/`} >
             <p>Já tem uma conta? Faça o login!</p>
+            </Link>
         </Container>
     )
 }
