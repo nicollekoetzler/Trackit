@@ -12,7 +12,7 @@ export default function TelaLogin() {
     const [inputEmail, setInputEmail] = useState("");
     const [inputPassword, setInputPassword] = useState("");
 
-    // infosUsuario - armazena objeto com informações usuário
+    // - infosUsuario - armazena objeto com informações usuário
     // const [infosUsuario, setInfosUsuario] = useState({});
 
     function setData(event) {
