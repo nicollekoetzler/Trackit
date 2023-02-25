@@ -14,7 +14,7 @@ export default function TelaCadastro() {
     const [inputImage, setInputImage] = useState("");
     const [inputPassword, setInputPassword] = useState("");
 
-    const [infosCadastro, setInfosCadastro] = useState({});
+    // const [infosCadastro, setInfosCadastro] = useState({});
     
     const navigate = useNavigate();
 

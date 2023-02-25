@@ -7,8 +7,8 @@ import TelaCadastro from "./TelaCadastro";
 import TelaHabitos from "./TelaHabitos";
 import TelaHoje from "./TelaHoje";
 import TelaHistorico from "./TelaHistorico";
-import Header from "./Layouts/Header";
-import Bottom from "./Layouts/Bottom";
+// import Header from "./Layouts/Header";
+// import Bottom from "./Layouts/Bottom";
 
 
 export default function App(){
