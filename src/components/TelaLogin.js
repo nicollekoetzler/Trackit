@@ -16,7 +16,7 @@ export default function TelaLogin() {
     const [infosUsuario, setInfosUsuario] = useState({});
 
     function setData(event) {
-        event.preventDefault()
+        event.preventDefault();
 
         const body = {
             email: inputEmail,
@@ -36,10 +36,10 @@ export default function TelaLogin() {
             <img src={logo} />
             <form onSubmit={setData}>
                 <Email>
-                    <input onChange={e => setInputEmail(e.target.value)} value={inputEmail} type="email" placeholder="email"/>
+                    <input onChange={e => setInputEmail(e.target.value)} value={inputEmail} type="email" placeholder="Email"/>
                 </Email>
                 <Senha>
-                    <input onChange={e => setInputPassword(e.target.value)} value={inputPassword} type="password" placeholder="senha"/>
+                    <input onChange={e => setInputPassword(e.target.value)} value={inputPassword} type="password" placeholder="Senha"/>
                 </Senha>
                 <Button>
                     <button type="submit">Entrar</button>
@@ -71,61 +71,75 @@ form {
     flex-direction: column;
 }
 
-p{
-    font-size: 13.976px;
+p {
+    font-size: 14px;
     line-height: 17px;
     text-align: center;
-    text-decoration-line: underline;
-    color: #52B6FF;
-    margin-top: 25px;
+    text-decoration: none;
+    color: #868e96;
+    margin-top: 32px;
     cursor: pointer;
 }
 `
 
 const Button = styled.div`
 button {
-    width: 309px;
+    font-family: 'Roboto';
+    width: 300px;
     height: 45px;
-    background: #52B6FF;
-    border-radius: 4.6px;
+    background: #5567C9;
+    border-radius: 50px;
     border: none;
     cursor: pointer;
     color: white;
-    font-size: 20.976px;
-    font-family: 'Lexend Deca';
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
-    margin-top: 6px;
+    margin-top: 26px;
 }
 `
 
 const Email = styled.div`
 
 input {
-    background: #FFFFFF;
-    border: 1px solid #D5D5D5;
-    border-radius: 5px;
-    width: 303px;
+    font-family: 'Roboto';
+    background: #f4f4f4;
+    border: none;
+    border-radius: 50px;
+    width: 300px;
     height: 45px;
-    font-family: 'Lexend Deca';
     font-style: normal;
     font-weight: 400;
-    font-size: 19.976px;
+    font-size: 14px;
+    padding-left: 20px;
+    outline: 1px solid #f4f4f4;
+    transition: 0.5s;
+}
+
+input:focus {
+    outline: 1px solid #5567C9;
 }
 `
 
 const Senha = styled.div`
 
 input {
-    background: #FFFFFF;
-    border: 1px solid #D5D5D5;
-    border-radius: 5px;
-    width: 303px;
+    background: #f4f4f4;
+    border: none;
+    border-radius: 50px;
+    width: 300px;
     height: 45px;
-    font-family: 'Lexend Deca';
+    font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    font-size: 19.976px;
-    margin-top: 6px;
+    font-size: 14px;
+    margin-top: 16px;
+    padding-left: 20px;
+    outline: 1px solid #f4f4f4;
+    transition: 0.5s;
+}
+
+input:focus {
+    outline: 1px solid #5567C9;
 }
 `

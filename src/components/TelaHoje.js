@@ -28,7 +28,7 @@ const Container = styled.div`
     background-color: #E7E7E7;
     display: flex;
     flex-direction: column;
-    padding-left: 18px;
+    padding: 24px;
 
 h1 {
     font-size: 22.976px;
@@ -55,7 +55,6 @@ const Habit = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 13px;
     
 `
 const Check = styled.div`
