@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import logo from '../assets/css/imgs/logo.png'
 import axios from 'axios'
-import {Link} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-
+import { useContext } from "react";
+import UserContext from "../contexts/UserContext";
 
 
 export default function TelaLogin() {
@@ -12,8 +13,11 @@ export default function TelaLogin() {
     const [inputEmail, setInputEmail] = useState("");
     const [inputPassword, setInputPassword] = useState("");
 
-    // - infosUsuario - armazena objeto com informações usuário
-    // const [infosUsuario, setInfosUsuario] = useState({});
+    const { infosUsuario, setInfosUsuario } = useContext(UserContext);
+
+    // const [removeLoading, setRemoveLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     function setData(event) {
         event.preventDefault();
@@ -26,8 +30,12 @@ export default function TelaLogin() {
         const promise = axios.post(URL, body);
     
         promise.then((response) => {
-            console.log(response);
+            setInfosUsuario(response.data);
+            navigate("/hoje")
+            // setRemoveLoading(true);
         });
+
+        promise.catch(err => alert("Usuário inválido."));
     }
 
 
