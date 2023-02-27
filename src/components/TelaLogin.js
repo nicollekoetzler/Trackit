@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logo from '../assets/css/imgs/logo.png'
+import logotrackit50 from '../assets/css/imgs/logotrackit50.png'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -41,7 +41,8 @@ export default function TelaLogin() {
 
     return(
         <Container>
-            <img src={logo} />
+            <img src={logotrackit50} />
+            <h3>Live your best habits</h3>
             <form onSubmit={setData}>
                 <Email>
                     <input onChange={e => setInputEmail(e.target.value)} value={inputEmail} type="email" placeholder="Email"/>
@@ -70,7 +71,8 @@ flex-direction: column;
 background-color: white;
 
 img {
-    margin-bottom: 15px;
+    height: 50px;
+    margin-bottom: 22px;
 }
 
 form {
@@ -80,12 +82,18 @@ form {
     flex-direction: column;
 }
 
+h3 {
+    color: #001949;
+    font-size: 16px;
+    margin-bottom: 56px;
+}
+
 p {
     font-size: 14px;
     line-height: 17px;
     text-align: center;
     text-decoration: none;
-    color: #868e96;
+    color: gray;
     margin-top: 32px;
     cursor: pointer;
 }

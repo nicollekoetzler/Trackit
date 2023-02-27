@@ -1,18 +1,23 @@
 import styled from 'styled-components';
 import defaultimage from '../assets/css/imgs/defaultimage.png';
 import { Link } from 'react-router-dom';
-import { CircularProgressbar } from 'react-circular-progressbar';
+import logotrackit32 from '../assets/css/imgs/logotrackit32.png'
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 export default function TelaHoje(){
+
+    const percentage = 66;
+
     return(
         <>  
             <Header>
-                <h1>TrackIt</h1>
-                <img src={defaultimage} />
+                <img src={logotrackit32} />
+                <img className='profile' src={defaultimage} />
             </Header>
             <Container>
                 <div className="title">
-                    <h1>Metas de hoje</h1>
+                    <h1>Segunda-feira, 27</h1>
                     <p>Vamos lá, está quase!</p>
                 </div>
                 <Habits>
@@ -23,7 +28,7 @@ export default function TelaHoje(){
                         </div>
                         <Right>
                             <Record>
-                                <p>3 dias</p>
+                                <p>2 dias</p>
                             </Record>
                             <Check>
                                 <ion-icon name="checkmark-circle-outline"></ion-icon>
@@ -33,7 +38,7 @@ export default function TelaHoje(){
                     <Habit>
                         <div className="text">
                             <h1>Duolingo - Japonês</h1>
-                            <p>Recorde: 2 dias</p>
+                            <p>Recorde: 4 dias</p>
                         </div>
                         <Right>
                             <Record>
@@ -50,7 +55,21 @@ export default function TelaHoje(){
                 <Link to={`/habitos`} >
                     <ion-icon name="add-circle-outline"></ion-icon>
                 </Link>
-                    <div className="home"></div>
+                    <div className="home">
+                        <CircularProgressbar 
+                            value={percentage}
+                            text={''}
+                            background
+                            styles={buildStyles({
+                            backgroundColor: "#ffffff",
+                            textColor: "#ffffff",
+                            pathColor: "#5567C9",
+                            trailColor: "transparent",
+                            textSize: "18px"
+                            })}
+                        />
+                        <p>Hoje</p>
+                    </div>
                 <Link to={`/historico`} >
                     <ion-icon name="calendar-outline"></ion-icon>
                 </Link>
@@ -66,11 +85,15 @@ const Header = styled.div`
     font-size: 24px;
     display: flex;
     align-items: center;
-    padding: 0 24px 0 24px;
+    padding: 0 20px 0 20px;
     justify-content: space-between;
     font-weight: 700;
 
 img {
+    height: 32px;
+}
+
+.profile {
     height: 50px;
     width: 50px;
     background-color: gray;
@@ -83,7 +106,7 @@ const Container = styled.div`
     width: 100vw;
     display: flex;
     flex-direction: column;
-    padding: 24px;
+    padding: 20px;
     margin-top: 6px;
 
 .title > h1 {
@@ -94,7 +117,7 @@ const Container = styled.div`
 
 .title > p {
     color: gray;
-    margin-top: 6px;
+    margin-top: 12px;
 }
 
 .title {
@@ -114,15 +137,18 @@ const Habit = styled.div`
     margin-top: 16px;
     padding: 15px;
     background-color: white;
+    /* background-color: #e7e9f6; */
     border-radius: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* border: 1px solid #5567C9; */
 
 .text > h1 {
     font-weight: 700;
     font-size: 20px;
     margin-bottom: 8px;
+    color: #001949;
 }
 
 .text > p {
@@ -139,8 +165,9 @@ const Right = styled.div`
 const Check = styled.div`
 
 ion-icon {
-    font-size: 34px;
+    font-size: 30px;
     color: #8f8f8f;
+    /* color: #4c9b67; */
     margin-top: 6px;
 }
 `
@@ -171,6 +198,7 @@ const Bottom = styled.div`
 ion-icon {
     font-size: 34px;
     color: white;
+    cursor: pointer;
 }
 
 .home {
@@ -182,5 +210,16 @@ ion-icon {
     top: -50%;
     border: 6px solid #f3f3f3;
     right: 155px;
+    color: #001949;
+    font-weight: 700;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+p {
+    position: absolute;
+    z-index: 10;
 }
 `

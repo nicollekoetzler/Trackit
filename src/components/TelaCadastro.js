@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logo from '../assets/css/imgs/logo.png'
+import logotrackit50 from '../assets/css/imgs/logotrackit50.png'
 import axios from 'axios'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -46,7 +46,7 @@ export default function TelaCadastro() {
 
     return(
         <Container>
-            <img src={logo} />
+            <img src={logotrackit50} />
             <form onSubmit={conferirUrl}>
                 <FormStyle>
                     <input onChange={e => setInputEmail(e.target.value)} value={inputEmail} type="email" placeholder="Email"/>
@@ -78,6 +78,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
+background-color: white;
 
 img {
     margin-bottom: 15px;
