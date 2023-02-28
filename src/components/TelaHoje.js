@@ -4,8 +4,50 @@ import { Link } from 'react-router-dom';
 import logotrackit32 from '../assets/css/imgs/logotrackit32.png'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
+import UserContext from "../contexts/UserContext";
+import { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+
+function TodayHabits({name, currentSequence, highestSequence}){
+
+    return (
+        <Habit>
+            <div className="text">
+                <h1>{name}</h1>
+                <p>Recorde: {highestSequence} dias</p>
+            </div>
+            <Right>
+                <Record>
+                    <p>{currentSequence} dias</p>
+                </Record>
+                <Check>
+                    <ion-icon name="checkmark-circle-outline"></ion-icon>
+                </Check>
+            </Right>
+        </Habit>
+    )
+}
 
 export default function TelaHoje(){
+
+    const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
+    const { infosUsuario, setInfosUsuario } = useContext(UserContext);
+    const [todayHabit, setTodayHabit] = useState([]);
+
+    useEffect(() => {
+
+        const header = {
+            headers: {
+                "Authorization": `Bearer ${ infosUsuario.token }`
+            }
+        }
+
+        const promise = axios.get(URL, header)
+    
+        promise.then(response => {
+            setTodayHabit(response.data)
+        })
+    }, [] );
 
     const percentage = 66;
 
@@ -21,34 +63,7 @@ export default function TelaHoje(){
                     <p>Vamos lá, está quase!</p>
                 </div>
                 <Habits>
-                    <Habit>
-                        <div className="text">
-                            <h1>Jogar sudoku</h1>
-                            <p>Recorde: 2 dias</p>
-                        </div>
-                        <Right>
-                            <Record>
-                                <p>2 dias</p>
-                            </Record>
-                            <Check>
-                                <ion-icon name="checkmark-circle-outline"></ion-icon>
-                            </Check>
-                        </Right>
-                    </Habit>
-                    <Habit>
-                        <div className="text">
-                            <h1>Duolingo - Japonês</h1>
-                            <p>Recorde: 4 dias</p>
-                        </div>
-                        <Right>
-                            <Record>
-                                <p>4 dias</p>
-                            </Record>
-                            <Check>
-                                <ion-icon name="checkmark-circle-outline"></ion-icon>
-                            </Check>
-                        </Right>
-                    </Habit>
+                    {todayHabit.map(value => <TodayHabits id={value.id} name={value.name} done={value.done} currentSequence={value.currentSequence} highestSequence={value.highestSequence} />)}
                 </Habits>
             </Container>
             <Bottom>
