@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-import defaultimage from '../assets/css/imgs/defaultimage.png';
-import { Link } from 'react-router-dom';
-import logotrackit32 from '../assets/css/imgs/logotrackit32.png'
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import UserContext from "../contexts/UserContext";
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import LayoutBottom from './Layouts/Bottom';
+import LayoutHeader from './Layouts/Header';
 
 function TodayHabits({name, currentSequence, highestSequence}){
 
@@ -14,12 +12,20 @@ function TodayHabits({name, currentSequence, highestSequence}){
         <Habit>
             <div className="text">
                 <h1>{name}</h1>
-                <p>Recorde: {highestSequence} dias</p>
+                <p>
+                    {highestSequence > 1
+                    ? `${highestSequence} dias`
+                    : `${highestSequence} dia`}
+                </p>
             </div>
             <Right>
-                <Record>
-                    <p>{currentSequence} dias</p>
-                </Record>
+                <Sequence>
+                    <p>
+                        {currentSequence > 1
+                        ? `${currentSequence} dias`
+                        : `${currentSequence} dia`}
+                    </p>
+                </Sequence>
                 <Check>
                     <ion-icon name="checkmark-circle-outline"></ion-icon>
                 </Check>
@@ -49,14 +55,9 @@ export default function TelaHoje(){
         })
     }, [] );
 
-    const percentage = 66;
-
     return(
         <>  
-            <Header>
-                <img src={logotrackit32} />
-                <img className='profile' src={defaultimage} />
-            </Header>
+            <LayoutHeader />
             <Container>
                 <div className="title">
                     <h1>Segunda-feira, 27</h1>
@@ -66,58 +67,14 @@ export default function TelaHoje(){
                     {todayHabit.map(value => <TodayHabits id={value.id} name={value.name} done={value.done} currentSequence={value.currentSequence} highestSequence={value.highestSequence} />)}
                 </Habits>
             </Container>
-            <Bottom>
-                <Link to={`/habitos`} >
-                    <ion-icon name="add-circle-outline"></ion-icon>
-                </Link>
-                    <div className="home">
-                        <CircularProgressbar 
-                            value={percentage}
-                            text={''}
-                            background
-                            styles={buildStyles({
-                            backgroundColor: "#ffffff",
-                            textColor: "#ffffff",
-                            pathColor: "#5567C9",
-                            trailColor: "transparent",
-                            textSize: "18px"
-                            })}
-                        />
-                        <p>Hoje</p>
-                    </div>
-                <Link to={`/historico`} >
-                    <ion-icon name="calendar-outline"></ion-icon>
-                </Link>
-            </Bottom>
+            <LayoutBottom />
         </>
     )
 }
 
-const Header = styled.div`
-    height: 70px;
-    background-color: #f3f3f3;
-    color: #5567C9;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    padding: 0 20px 0 20px;
-    justify-content: space-between;
-    font-weight: 700;
-
-img {
-    height: 32px;
-}
-
-.profile {
-    height: 50px;
-    width: 50px;
-    background-color: gray;
-    border-radius: 100%;
-}
-`
 
 const Container = styled.div`
-    height: 730px;
+    height: 716px;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -186,7 +143,7 @@ ion-icon {
     margin-top: 6px;
 }
 `
-const Record = styled.div`
+const Sequence = styled.div`
     height: 28px;
     background-color: #b7f3d2;
     border-radius: 10px;
@@ -195,46 +152,4 @@ const Record = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-`
-
-const Bottom = styled.div`
-    height: 90px;
-    width: 100%;
-    background-color: #5567C9;
-    border-radius: 50% 50% 0 0;
-    padding: 34px 58px 34px 58px;
-    font-size: 18px;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: bottom;
-    position: relative;
-
-ion-icon {
-    font-size: 34px;
-    color: white;
-    cursor: pointer;
-}
-
-.home {
-    height: 110px;
-    width: 110px;
-    border-radius: 100%;
-    background-color: white;
-    position: absolute;
-    top: -50%;
-    border: 6px solid #f3f3f3;
-    right: 155px;
-    color: #001949;
-    font-weight: 700;
-    font-size: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-p {
-    position: absolute;
-    z-index: 10;
-}
 `
