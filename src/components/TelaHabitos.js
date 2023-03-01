@@ -7,7 +7,9 @@ export default function TelaHabitos(){
         <>  
             <LayoutHeader />
             <Container>
-                <h1>Tela Hábitos</h1>
+                <div className="title">
+                    <h1>Meus hábitos</h1>
+                </div>
             </Container>
             <LayoutBottom />
         </>
@@ -21,4 +23,10 @@ const Container = styled.div`
     flex-direction: column;
     padding: 20px;
     margin-top: 6px;
+
+.title > h1 {
+    font-size: 34px;
+    font-weight: 700;
+    color: #001949;
+}
 `

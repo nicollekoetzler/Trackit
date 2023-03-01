@@ -5,32 +5,86 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import LayoutBottom from './Layouts/Bottom';
 import LayoutHeader from './Layouts/Header';
+import { AiFillCheckCircle } from 'react-icons/ai';
+import { AiFillFire } from 'react-icons/ai';
 
-function TodayHabits({name, currentSequence, highestSequence}){
+
+function TodayHabits({id, name, done, currentSequence, highestSequence}){
+    
+    const [isSelected, setIsSelected] = useState({done});
+    
+    function ToggleHabit() {
+
+        const { infosUsuario, setInfosUsuario } = useContext(UserContext);
+        const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`
+    
+        useEffect(() => {
+            const header = {
+                headers: {
+                    "Authorization": `Bearer ${ infosUsuario.token }`
+                }
+            }
+            
+            const promise = axios.post(URL, header)
+        
+            promise.then((response) => {
+                setIsSelected(!isSelected);
+            });
+            
+            promise.catch((err) => {
+                alert("Não foi possível selecionar o hábito");
+            });
+    
+        },[]);
+    }
 
     return (
-        <Habit>
+        <>
+            <UnselectedHabit>
+                <div className="text">
+                    <h1>{name}</h1>
+                    <p>
+                        Recorde: 
+                        {highestSequence === 1
+                        ? ` ${highestSequence} dia`
+                        : ` ${highestSequence} dias`}
+                    </p>
+                </div>
+                <Right>
+                    <Sequence>
+                        <p>
+                            {currentSequence === 1
+                            ? `${currentSequence} dia`
+                            : `${currentSequence} dias`}
+                        </p>
+                    </Sequence>
+                    <div className="blank"></div>
+                </Right>
+            </UnselectedHabit>
+
+            <SelectedHabit>
             <div className="text">
                 <h1>{name}</h1>
                 <p>
-                    {highestSequence > 1
-                    ? `${highestSequence} dias`
-                    : `${highestSequence} dia`}
+                    Recorde: 
+                    {highestSequence === 1
+                    ? ` ${highestSequence} dia`
+                    : ` ${highestSequence} dias`}
                 </p>
             </div>
             <Right>
                 <Sequence>
+                    <Fire />
                     <p>
-                        {currentSequence > 1
-                        ? `${currentSequence} dias`
-                        : `${currentSequence} dia`}
+                        {currentSequence === 1
+                        ? `${currentSequence} dia`
+                        : `${currentSequence} dias`}
                     </p>
                 </Sequence>
-                <Check>
-                    <ion-icon name="checkmark-circle-outline"></ion-icon>
-                </Check>
+                <Checkmark />
             </Right>
-        </Habit>
+            </SelectedHabit>
+        </>
     )
 }
 
@@ -53,7 +107,7 @@ export default function TelaHoje(){
         promise.then(response => {
             setTodayHabit(response.data)
         })
-    }, [] );
+    },[]);
 
     return(
         <>  
@@ -102,19 +156,16 @@ const Habits = styled.div`
     justify-content: center;
     align-items: center;
 `
-
-const Habit = styled.div`
+const UnselectedHabit = styled.div`
     width: 100%;
     height: 94px;
     margin-top: 16px;
     padding: 15px;
     background-color: white;
-    /* background-color: #e7e9f6; */
     border-radius: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* border: 1px solid #5567C9; */
 
 .text > h1 {
     font-weight: 700;
@@ -126,23 +177,49 @@ const Habit = styled.div`
 .text > p {
     color: gray;
 }
-`
 
+.blank {
+    height: 30px;
+    width: 30px;
+}
+`
+const SelectedHabit = styled.div`
+    width: 100%;
+    height: 94px;
+    margin-top: 16px;
+    padding: 15px;
+    /* background-color: white; */
+    background-color: #e7e9f6;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #5567C9;
+
+.text > h1 {
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: gray;
+}
+
+.text > p {
+    color: gray;
+}
+`
 const Right = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 `
 
-const Check = styled.div`
-
-ion-icon {
+const Checkmark = styled(AiFillCheckCircle)`
     font-size: 30px;
-    color: #8f8f8f;
+    color: #5567C9;
     /* color: #4c9b67; */
     margin-top: 6px;
-}
 `
+
 const Sequence = styled.div`
     height: 28px;
     background-color: #b7f3d2;
@@ -152,4 +229,9 @@ const Sequence = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+`
+
+const Fire = styled(AiFillFire)`
+    margin-right: 4px;
+    font-size: 20px;
 `
