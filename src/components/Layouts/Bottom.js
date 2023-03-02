@@ -37,6 +37,9 @@ export default function LayoutBottom(){
 const Bottom = styled.div`
     height: 90px;
     width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
     background-color: #5567C9;
     border-radius: 50% 50% 0 0;
     padding: 34px 58px 34px 58px;
@@ -44,8 +47,6 @@ const Bottom = styled.div`
     color: white;
     display: flex;
     justify-content: space-between;
-    align-items: bottom;
-    position: relative;
 
 ion-icon {
     font-size: 34px;
@@ -61,7 +62,8 @@ ion-icon {
     position: absolute;
     top: -50%;
     border: 6px solid #f3f3f3;
-    right: 155px;
+    left: 50%;
+    transform: translateX(-50%);
     color: #001949;
     font-weight: 700;
     font-size: 22px;

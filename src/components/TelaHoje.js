@@ -40,6 +40,7 @@ function TodayHabits({id, name, done, currentSequence, highestSequence}){
 
     return (
         <>
+            { !done ?
             <UnselectedHabit>
                 <div className="text">
                     <h1>{name}</h1>
@@ -61,7 +62,7 @@ function TodayHabits({id, name, done, currentSequence, highestSequence}){
                     <div className="blank"></div>
                 </Right>
             </UnselectedHabit>
-
+            :
             <SelectedHabit>
             <div className="text">
                 <h1>{name}</h1>
@@ -84,6 +85,7 @@ function TodayHabits({id, name, done, currentSequence, highestSequence}){
                 <Checkmark />
             </Right>
             </SelectedHabit>
+            }
         </>
     )
 }
@@ -114,7 +116,7 @@ export default function TelaHoje(){
             <LayoutHeader />
             <Container>
                 <div className="title">
-                    <h1>Segunda-feira, 27</h1>
+                    <h1>Quarta-feira, 01</h1>
                     <p>Vamos lá, está quase!</p>
                 </div>
                 <Habits>
@@ -128,17 +130,17 @@ export default function TelaHoje(){
 
 
 const Container = styled.div`
-    height: 716px;
-    width: 100vw;
+    height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    margin-top: 6px;
+    padding: 0 20px;
 
 .title > h1 {
     font-size: 34px;
     font-weight: 700;
     color: #001949;
+    padding-top: 110px;
 }
 
 .title > p {
@@ -150,14 +152,17 @@ const Container = styled.div`
     margin-bottom: 16px;
 }
 `
+
 const Habits = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 `
+
 const UnselectedHabit = styled.div`
     width: 100%;
+    /* max-width: 450px; */
     height: 94px;
     margin-top: 16px;
     padding: 15px;
@@ -166,6 +171,7 @@ const UnselectedHabit = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: 1px solid lightgray;
 
 .text > h1 {
     font-weight: 700;
@@ -183,8 +189,10 @@ const UnselectedHabit = styled.div`
     width: 30px;
 }
 `
+
 const SelectedHabit = styled.div`
     width: 100%;
+    /* max-width: 450px; */
     height: 94px;
     margin-top: 16px;
     padding: 15px;
@@ -194,7 +202,7 @@ const SelectedHabit = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #5567C9;
+    /* border: 1px solid #5567C9; */
 
 .text > h1 {
     font-weight: 700;
@@ -225,6 +233,7 @@ const Sequence = styled.div`
     background-color: #b7f3d2;
     border-radius: 10px;
     color: #4c9b67;
+    font-weight: 700;
     padding: 0 8px 0 8px;
     display: flex;
     align-items: center;
@@ -232,6 +241,6 @@ const Sequence = styled.div`
 `
 
 const Fire = styled(AiFillFire)`
-    margin-right: 4px;
+    margin-right: 6px;
     font-size: 20px;
 `

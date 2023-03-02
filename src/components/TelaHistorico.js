@@ -21,12 +21,12 @@ const Container = styled.div`
     width: 100vw;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    margin-top: 6px;
+    padding: 0 20px;
 
 .title > h1 {
     font-size: 34px;
     font-weight: 700;
     color: #001949;
+    padding-top: 110px;
 }
 `

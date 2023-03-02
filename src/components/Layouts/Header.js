@@ -13,7 +13,11 @@ export default function LayoutHeader(){
 
 const Header = styled.div`
     height: 84px;
-    background-color: #f3f3f3;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #f2f2f2;
     color: #5567C9;
     font-size: 24px;
     display: flex;
