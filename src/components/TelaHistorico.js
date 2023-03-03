@@ -9,6 +9,8 @@ export default function TelaHistorico() {
             <Container>
                 <div className="title">
                     <h1>Histórico</h1>
+                    <p>Em breve!</p>
+                    <p>Confira essa funcionalidade novamente a partir do dia 14/03 :)</p>
                 </div>
             </Container>
             <LayoutBottom />
@@ -17,7 +19,7 @@ export default function TelaHistorico() {
 }
 
 const Container = styled.div`
-    height: 716px;
+    height: 100vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -28,5 +30,10 @@ const Container = styled.div`
     font-weight: 700;
     color: #001949;
     padding-top: 110px;
+}
+
+.title > p {
+    color: gray;
+    margin-top: 12px;
 }
 `

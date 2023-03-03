@@ -47,6 +47,7 @@ export default function TelaCadastro() {
     return(
         <Container>
             <img src={logotrackit50} />
+            <h3>Live your best habits</h3>
             <form onSubmit={conferirUrl}>
                 <FormStyle>
                     <input onChange={e => setInputEmail(e.target.value)} value={inputEmail} type="email" placeholder="Email"/>
@@ -89,6 +90,12 @@ form {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+h3 {
+    color: #001949;
+    font-size: 16px;
+    margin-bottom: 56px;
 }
 
 p {

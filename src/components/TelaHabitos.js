@@ -6,13 +6,13 @@ import LayoutBottom from './Layouts/Bottom';
 import LayoutHeader from './Layouts/Header';
 import { BiTrash } from 'react-icons/bi';
 
-function MyHabit({id, name}){
+function MyHabit({id, name, setReloadHabits}){
 
     const { infosUsuario, setInfosUsuario } = useContext(UserContext);
-
-    function deleteHabit({id}){
+    
+    function deleteHabit(){
+        
         const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`
-
         if (window.confirm('Você realmente deseja excluir este hábito?')) {
 
             const header = {
@@ -21,10 +21,10 @@ function MyHabit({id, name}){
                 }
             }
 
-            const promise = axios.get(URL, header)
+            const promise = axios.delete(URL, header)
 
             promise.then(response => {
-                // ?
+                setReloadHabits(true)
             })
         };
     }
@@ -34,7 +34,7 @@ function MyHabit({id, name}){
             <MyHabits>
                 <div className="text">
                     <h1>{name}</h1>
-                    <Trash onClick={deleteHabit()}/>
+                    <Trash onClick={deleteHabit}/>
                 </div>
                 <div className="line"></div>
                 <div className="week">
@@ -56,7 +56,10 @@ export default function TelaHabitos(){
 
     const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
     const { infosUsuario, setInfosUsuario } = useContext(UserContext);
+    const [ reloadHabits, setReloadHabits] = useState(false);
     const [ habit, setHabit ] = useState([]);
+
+    console.log("oi")
 
     useEffect(() => {
         const header = {
@@ -70,7 +73,7 @@ export default function TelaHabitos(){
         promise.then(response => {
             setHabit(response.data)
         })
-    },[]);
+    },[reloadHabits]);
 
     return (
         <>  
@@ -80,7 +83,7 @@ export default function TelaHabitos(){
                     <h1>Meus hábitos</h1>
                 </div>
                 <AllHabits>
-                        { habit.map( value => <MyHabit id={value.id} name={value.name} days={value.days} />)}
+                        { habit.map( value => <MyHabit setReloadHabits={setReloadHabits} id={value.id} name={value.name} days={value.days} />)}
                 </AllHabits>
             </Container>
             <LayoutBottom />
